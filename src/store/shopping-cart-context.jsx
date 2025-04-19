@@ -7,8 +7,19 @@ export const CartContext = createContext({
   updateCartItemQuantity: () => {},
 });
 
+// add a reducer function to prepare for handling future cart actions (e.g., add, update, remove)
+function shoppingCartReducer(state, action) {
+  return state;
+}
+
 export default function CartContextProvider({ children }) {
-  const [shoppingCartState, shoppingCartDispatch] = useReducer();
+  // initialize useReducer with a reducer function and an initial state, marking the beginning of the transition from useState to reducer-based state management
+  const [shoppingCartState, shoppingCartDispatch] = useReducer(
+    shoppingCartReducer,
+    {
+      items: [],
+    }
+  );
 
   const [shoppingCart, setShoppingCart] = useState({
     items: [],
@@ -73,7 +84,7 @@ export default function CartContextProvider({ children }) {
   // create the context value object containing the current cart items and the handler to add items,
   // which will be passed to all components consuming CartContext
   const ctxValue = {
-    items: shoppingCart.items,
+    items: shoppingCartState.items,
     addItemToCart: handleAddItemToCart,
     updateCartItemQuantity: handleUpdateCartItemQuantity,
   };
