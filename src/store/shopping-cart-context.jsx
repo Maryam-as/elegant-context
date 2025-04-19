@@ -6,4 +6,5 @@ import { createContext } from "react";
 // This is *not* a regular React component itself, but it provides components.
 export const CartContext = createContext({
   items: [],
+  addItemToCart: () => {}, // placeholder function to enable auto-completion and prevent undefined errors
 });
