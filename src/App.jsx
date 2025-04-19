@@ -67,8 +67,15 @@ function App() {
     });
   }
 
+  // create the context value object containing the current cart items and the handler to add items,
+  // which will be passed to all components consuming CartContext
+  const ctxValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart,
+  };
+
   return (
-    <CartContext.Provider value={{ items: [] }}>
+    <CartContext.Provider value={ctxValue}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
